@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Your awesome title</title>
+    <title>4n4m1k</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Jul 2019 22:47:22 -0400</pubDate>
-    <lastBuildDate>Sat, 27 Jul 2019 22:47:22 -0400</lastBuildDate>
+    <pubDate>Sat, 27 Jul 2019 23:30:48 -0400</pubDate>
+    <lastBuildDate>Sat, 27 Jul 2019 23:30:48 -0400</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>LaCasaDePapel HTB Walkthrough</title>
         <description>&lt;h4&gt;Hello!&lt;/h4&gt;
-&lt;h4&gt;LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.&amp;lt;H4&amp;gt;
-&amp;lt;H4&amp;gt;This was an interesting box with some CTF type features. Overall, I had fun hacking this box.&lt;/h4&gt;
+&lt;h4&gt;LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.&lt;/h4&gt;
+&lt;h4&gt;This was an interesting box with some CTF type features. Overall, I had fun hacking this box.&lt;/h4&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1&gt;Enumeration:  &lt;/h1&gt;
@@ -188,7 +188,7 @@ Now I want something to that will help me log into the machine. There is &lt;cod
 &lt;br /&gt;&lt;br /&gt;
 To download that we have to convert the path into base64 - &lt;code class=&quot;highlighter-rouge&quot;&gt;echo -n ../.ssh/id_rsa | base64&lt;/code&gt;. We get &lt;code class=&quot;highlighter-rouge&quot;&gt;Li4vLnNzaC9pZF9yc2E=&lt;/code&gt;&lt;br /&gt;
 &lt;br /&gt;
-It worked!&amp;lt;br/:w&lt;/p&gt;
+It worked!&lt;br /&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 
   &lt;p&gt;&lt;img src=&quot;/images/hackthebox/lacasa/idrsa.png&quot; width=&quot;90%&quot; /&gt;

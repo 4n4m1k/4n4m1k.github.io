@@ -65,11 +65,16 @@ a:hover{
 
 }
 
-.post-list{
-
+.post-list-heading{
+    padding-top: 2em;
     text-align: center;
-
 }
+
+.post-list{
+    padding-top: 4em;
+    text-align: center;
+}
+
 .post-box{
   padding-top: 2em;
 padding-bottom: 2em;
@@ -93,6 +98,11 @@ padding-bottom: 0.3em;
   font-size: 19px;
   text-align: justify;
   padding-bottom: 5em;
+}
+
+.rss-subscribe{
+    padding-top: 2em; 
+    text-align: center;
 }
 pre{
 background-color: black !important;

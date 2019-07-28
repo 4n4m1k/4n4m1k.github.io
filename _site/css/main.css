@@ -51,7 +51,12 @@ a:hover {
   text-decoration: none !important;
   border-bottom: 1px dotted #03a4fb; }
 
+.post-list-heading {
+  padding-top: 2em;
+  text-align: center; }
+
 .post-list {
+  padding-top: 4em;
   text-align: center; }
 
 .post-box {
@@ -75,6 +80,10 @@ a:hover {
   font-size: 19px;
   text-align: justify;
   padding-bottom: 5em; }
+
+.rss-subscribe {
+  padding-top: 2em;
+  text-align: center; }
 
 pre {
   background-color: black !important;
