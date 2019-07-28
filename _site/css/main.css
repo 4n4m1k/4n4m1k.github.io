@@ -59,8 +59,11 @@ a:hover {
   padding-top: 4em;
   text-align: center; }
 
-.post-meta {
-  text-align: center; }
+ul {
+  padding-left: 0; }
+
+ul li {
+  list-style-position: inside; }
 
 .post-box {
   padding-top: 2em;
