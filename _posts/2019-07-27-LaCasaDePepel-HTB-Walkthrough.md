@@ -6,9 +6,9 @@ categories:	[HTB, walkthrough]
 author:	4n4m1k
 ---
 
-<H4>Hello!<br/><br/>
-LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.
-This was an interesting box with some CTF type features. Overall, I had fun hacking this box.</H4>
+<H4>Hello!</H4>
+<H4>LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.<H4>
+<H4>This was an interesting box with some CTF type features. Overall, I had fun hacking this box.</H4>
 <br/>
 
 <H1>Enumeration:  </H1>
