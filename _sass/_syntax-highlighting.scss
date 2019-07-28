@@ -3,6 +3,9 @@
  */
 .highlight {
     background: black;
+		max-height: 600px;
+  	overflow-y: auto;
+
 
 
     .highlighter-rouge & {

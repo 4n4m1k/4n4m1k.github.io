@@ -129,7 +129,9 @@ code {
  * Syntax highlighting styles
  */
 .highlight {
-  background: black; }
+  background: black;
+  max-height: 600px;
+  overflow-y: auto; }
   .highlighter-rouge .highlight {
     background: black !important;
     color: white !important; }

