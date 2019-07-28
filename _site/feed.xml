@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>4n4m1k</title>
-    <description>&lt;h3&gt;Ramblings of an Infosec enthusiast!&lt;/h3&gt;</description>
+    <title>Your awesome title</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Jul 2019 22:02:44 -0400</pubDate>
-    <lastBuildDate>Sat, 27 Jul 2019 22:02:44 -0400</lastBuildDate>
+    <pubDate>Sat, 27 Jul 2019 22:47:22 -0400</pubDate>
+    <lastBuildDate>Sat, 27 Jul 2019 22:47:22 -0400</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>LaCasaDePapel HTB Walkthrough</title>
-        <description>&lt;h4&gt;Hello!&lt;br /&gt;&lt;br /&gt;
-LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.
-This was an interesting box with some CTF type features. Overall, I had fun hacking this box.&lt;/h4&gt;
+        <description>&lt;h4&gt;Hello!&lt;/h4&gt;
+&lt;h4&gt;LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.&amp;lt;H4&amp;gt;
+&amp;lt;H4&amp;gt;This was an interesting box with some CTF type features. Overall, I had fun hacking this box.&lt;/h4&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1&gt;Enumeration:  &lt;/h1&gt;
@@ -23,7 +23,8 @@ This was an interesting box with some CTF type features. Overall, I had fun hack
 &lt;code class=&quot;highlighter-rouge&quot;&gt;nmap -sC -sV -oA nmap/initial 10.10.10.131 -vvv&lt;/code&gt;
 &lt;br /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;PORT    STATE SERVICE  REASON  VERSION
+&lt;figure class=&quot;highlight&quot;&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;PORT    STATE SERVICE  REASON  VERSION
 21/tcp  open  ftp      syn-ack vsftpd 2.3.4
 22/tcp  open  ssh      syn-ack OpenSSH 7.9 (protocol 2.0)
 | ssh-hostkey: 
@@ -79,7 +80,8 @@ This was an interesting box with some CTF type features. Overall, I had fun hack
 | tls-nextprotoneg: 
 |   http/1.1
 |_  http/1.0
-Service Info: OS: Unix&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+Service Info: OS: Unix&lt;/code&gt;&lt;/pre&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -105,12 +107,14 @@ The exploit:
 If we try to log into the FTP server with a username ending with &lt;code class=&quot;highlighter-rouge&quot;&gt;:)&lt;/code&gt; and any password, then a backdoor opens at port &lt;code class=&quot;highlighter-rouge&quot;&gt;6200&lt;/code&gt;.
 &lt;br /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;ftp 10.10.10.131
+&lt;figure class=&quot;highlight&quot;&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;ftp 10.10.10.131
 Connected to 10.10.10.131.
 220 (vsFTPd 2.3.4)
 Name (10.10.10.131:an4m1k): user:)
 331 Please specify the password.
-Password:&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+Password:&lt;/code&gt;&lt;/pre&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;The shell freezes after this.&lt;/p&gt;
 

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="4n4m1k" property="og:site_name">
+  <meta content="Your awesome title" property="og:site_name">
 
   <meta content="LaCasaDePapel HTB Walkthrough" property="og:title">
 
@@ -13,7 +13,7 @@
   <meta content="article" property="og:type">
 
 
-  <meta content="<h3>Ramblings of an Infosec enthusiast!</h3>" property="og:description">
+  <meta content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." property="og:description">
 
 
   <meta content="http://localhost:4000/htb/walkthrough/2019/06/27/LaCasaDePepel-HTB-Walkthrough.html" property="og:url">
@@ -34,7 +34,7 @@
   
 
   <title>LaCasaDePapel HTB Walkthrough</title>
-  <meta name="description" content="Hello!LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.This was an i...">
+  <meta name="description" content="Hello!LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.&lt;H4&gt;&lt...">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/main.css">
@@ -53,7 +53,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous">
   <link rel="canonical" href="http://localhost:4000/htb/walkthrough/2019/06/27/LaCasaDePepel-HTB-Walkthrough.html">
-  <link rel="alternate" type="application/rss+xml" title="4n4m1k" href="http://localhost:4000/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -73,12 +73,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">4n4m1k</a>
+      <a class="navbar-brand" href="/">Your awesome title</a>
     </div>
 
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        
+        
+
         
         
         <li><a href="/about/">About</a></li>
@@ -89,6 +92,12 @@
         
         <li><a href="/download/">Download</a></li>
 
+        
+
+        
+        
+
+        
         
 
         
@@ -127,9 +136,9 @@
 
 
   <div class="post-content container" itemprop="articleBody">
-    <h4>Hello!<br /><br />
-LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.
-This was an interesting box with some CTF type features. Overall, I had fun hacking this box.</h4>
+    <h4>Hello!</h4>
+<h4>LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.&lt;H4&gt;
+&lt;H4&gt;This was an interesting box with some CTF type features. Overall, I had fun hacking this box.</h4>
 <p><br /></p>
 
 <h1>Enumeration:  </h1>
@@ -139,7 +148,8 @@ This was an interesting box with some CTF type features. Overall, I had fun hack
 <code class="highlighter-rouge">nmap -sC -sV -oA nmap/initial 10.10.10.131 -vvv</code>
 <br /></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html">PORT    STATE SERVICE  REASON  VERSION
+<figure class="highlight">
+  <pre><code class="language-html" data-lang="html">PORT    STATE SERVICE  REASON  VERSION
 21/tcp  open  ftp      syn-ack vsftpd 2.3.4
 22/tcp  open  ssh      syn-ack OpenSSH 7.9 (protocol 2.0)
 | ssh-hostkey: 
@@ -195,7 +205,8 @@ This was an interesting box with some CTF type features. Overall, I had fun hack
 | tls-nextprotoneg: 
 |   http/1.1
 |_  http/1.0
-Service Info: OS: Unix</code></pre></figure>
+Service Info: OS: Unix</code></pre>
+</figure>
 
 <p><br /></p>
 
@@ -221,12 +232,14 @@ The exploit:
 If we try to log into the FTP server with a username ending with <code class="highlighter-rouge">:)</code> and any password, then a backdoor opens at port <code class="highlighter-rouge">6200</code>.
 <br /></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html">ftp 10.10.10.131
+<figure class="highlight">
+  <pre><code class="language-html" data-lang="html">ftp 10.10.10.131
 Connected to 10.10.10.131.
 220 (vsFTPd 2.3.4)
 Name (10.10.10.131:an4m1k): user:)
 331 Please specify the password.
-Password:</code></pre></figure>
+Password:</code></pre>
+</figure>
 
 <p>The shell freezes after this.</p>
 
