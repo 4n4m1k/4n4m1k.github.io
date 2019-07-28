@@ -7,7 +7,7 @@ author:	4n4m1k
 ---
 
 <H4>Hello!</H4>
-<H4>LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.<H4>
+<H4>LaCasaDePapel just retired today and this my writeup for it. This is my first writeup so if you have any feedback then please let me know.</H4>
 <H4>This was an interesting box with some CTF type features. Overall, I had fun hacking this box.</H4>
 <br/>
 
@@ -186,7 +186,7 @@ Now I want something to that will help me log into the machine. There is `.ssh` 
 <br/><br/>
 To download that we have to convert the path into base64 - `echo -n ../.ssh/id_rsa | base64`. We get `Li4vLnNzaC9pZF9yc2E=`<br/>
 <br/>
-It worked!<br/:w
+It worked!<br/>
 >
 <img src="/images/hackthebox/lacasa/idrsa.png" width="90%">
 <br/><br/>
